@@ -1,0 +1,44 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+
+  /* Primary & secondary brand colors */
+  --color-primary: #042A2B;        /* Deep Teal */
+  --color-primary-focus: #064C4E;  /* Slightly lighter teal for hover/focus */
+  --color-primary-content: #FFFFFF; /* Text on primary bg */
+
+  --color-secondary: #F7CE3E;      /* Golden Yellow */
+  --color-secondary-focus: #FADB5F; /* Slightly lighter yellow for hover */
+  --color-secondary-content: #042A2B; /* Text on secondary bg */
+
+  /* Accent colors */
+  --color-accent: #16A34A;         /* Green for success */
+  --color-accent-focus: #22C55E;
+  --color-accent-content: #FFFFFF;
+
+  --color-info: #0EA5E9;           /* Info / highlights */
+  --color-info-content: #FFFFFF;
+
+  --color-success: #16A34A;
+  --color-success-content: #FFFFFF;
+
+  --color-warning: #F59E0B;        /* Warnings / caution */
+  --color-warning-content: #042A2B;
+
+  --color-error: #DC2626;          /* Errors / danger */
+  --color-error-content: #FFFFFF;
+
+  /* Backgrounds */
+  --color-base-100: #F9FAFB;       /* Main page background */
+  --color-base-200: #FFFFFF;       /* Card backgrounds */
+  --color-base-300: #E5E7EB;       /* Secondary surfaces / dividers */
+  --color-base-content: #0B0C0C;   /* Main text color */
+
+  /* Neutral for borders / muted elements */
+  --color-neutral: #9CA3AF;        /* Gray 400 */
+  --color-neutral-focus: #6B7280;
+  --color-neutral-content: #0B0C0C;
+}
