@@ -2,7 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router";
 
-
 const images = [
   "https://www.upwork.com/att/download/portfolio/persons/uid/1394948321970139136/profile/projects/files/4b674d48-20ad-4d50-bdaf-1e15f9429fb9",
   "https://www.upwork.com/att/download/portfolio/persons/uid/1559111323520700416/profile/projects/files/fee8d083-eb15-417f-8040-75040ce8c24c",
@@ -38,7 +37,7 @@ const BannerColumn = ({ direction = "down" }) => {
             key={i}
             src={img}
             alt="banner"
-            className="object-cover rounded-xl border border-secondary shadow-md transition-shadow hover:shadow-[0_0_2px_#f7ce3e,0_0_4px_#f7ce3e]"
+            className="object-cover rounded-xl border border-secondary/70 shadow-md transition-shadow hover:shadow-[0_0_2px_#f7ce3e,0_0_4px_#f7ce3e]"
             style={{ width: `${width}px`, height: `${height}px` }}
           />
         ))}
@@ -49,11 +48,11 @@ const BannerColumn = ({ direction = "down" }) => {
 
 const Banner = () => {
   return (
-    <section className="relative w-full h-screen overflow-hidden flex items-center justify-center">
-      {/* Gradient overlay (brand color with fade) */}
+    <section className="relative w-full h-screen overflow-hidden flex items-center justify-center border-b border-secondary">
+    
       <div className="absolute inset-0 bg-linear-to-b from-[#042A2B]/80 via-[#0A7373]/50 to-transparent"></div>
 
-      {/* Title & Subtitle */}
+      
       <div className="absolute z-10 text-center px-4">
         <h1 className="text-5xl md:text-6xl font-bold mb-4 text-white  drop-shadow-[0_4px_10px_rgba(0,0,0,0.6)]">
           Turn Your Skills Into Opportunity
@@ -62,12 +61,28 @@ const Banner = () => {
           Work with global clients and build the career you deserve.
         </p>
         <div className="space-x-3 mt-4">
-            <Link to={'/all-jobs'} className="btn btn-primary btn-lg">All Jobs</Link>
-            <Link to={'/add-job'} className="btn btn-secondary text-primary btn-lg">Create a Job</Link>
+          <Link to={"/all-jobs"}>
+            <motion.button
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="btn btn-lg  bg-[#042A2B] text-white border-none hover:bg-[#063637]"
+            >
+              All Jobs
+            </motion.button>
+          </Link>
+          <Link to={"/add-job"}>
+            <motion.button
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="btn btn-lg  bg-[#F7CE3E] text-[#042A2B] border-none hover:bg-[#FFD84C]"
+            >
+              Create a Job
+            </motion.button>
+          </Link>
         </div>
       </div>
 
-      {/* Image Columns */}
+      
       <div className="absolute inset-0 flex justify-center gap-4 px-2 md:px-8">
         {[0, 1, 2, 3, 4].map((i) => (
           <BannerColumn key={i} direction={i % 2 === 0 ? "down" : "up"} />

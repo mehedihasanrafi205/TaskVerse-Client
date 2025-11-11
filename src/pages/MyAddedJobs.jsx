@@ -12,6 +12,7 @@ import {
   Briefcase,
   Calendar,
   Plus,
+  Tag,
 } from "lucide-react";
 import Loading from "../components/Loading";
 
@@ -148,11 +149,12 @@ const MyAddedJobs = () => {
         <div className="space-y-4">
           {jobs.map((job, index) => (
             <motion.div
+              whileHover={{ boxShadow: "0 0 5px 2px #f7ce3e" }}
               key={job._id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white rounded-2xl shadow-lg hover:shadow-[0_8px_30px_rgba(0,0,0,0.12),0_0_30px_rgba(247,206,62,0.2)] transition-all duration-300 overflow-hidden border border-gray-100 hover:border-secondary/30 group"
+              className="bg-white rounded-2xl shadow-lg overflow-hidden border  border-secondary/30 hover:border-secondary/60 group"
             >
               <div className="grid md:grid-cols-12 gap-4 p-6">
                 {/* Job Image */}
@@ -176,12 +178,13 @@ const MyAddedJobs = () => {
                     </h3>
 
                     <div className="flex flex-wrap gap-3 mb-3">
-                      <span className="badge badge-secondary text-primary badge-lg hover:shadow-[0_0_15px_rgba(4,42,43,0.3)] transition-all duration-300">
-                        {job.category}
+                      <span className="badge badge-outline border-[#F7CE3E] text-[#042A2B] bg-[#F7CE3E]/20 hover:shadow-[0_0_15px_rgba(4,42,43,0.3)] transition-all duration-300">
+                        <Tag size={15} className="mr-1" />
+                        {job.category || "General"}
                       </span>
-                      <div className="flex items-center gap-1 text-secondary font-bold group-hover:drop-shadow-[0_0_8px_rgba(247,206,62,0.6)] transition-all duration-300">
+                      <div className="flex items-center gap-1 text-green-600 font-bold group-hover:drop-shadow-[0_0_8px_rgba(247,206,62,0.6)] transition-all duration-300">
                         <DollarSign size={18} />
-                        <span className="text-lg">
+                        <span className="text-lg ">
                           {job.price.toLocaleString()}
                         </span>
                       </div>
@@ -252,7 +255,7 @@ const MyAddedJobs = () => {
             </motion.div>
           ))}
         </div>
-        ){/* Desktop Table View */}
+        {/* Desktop Table View */}
         <div className="hidden xl:block mt-12 bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
           <div className="overflow-x-auto">
             <table className="table">

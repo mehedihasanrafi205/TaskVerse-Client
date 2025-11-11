@@ -31,7 +31,7 @@ const useAxios = () => {
           toast.error(" Log out the user for bad intention");
           console.log(" Log out the user for bad intention");
           signOutUser().then(() => {
-            navigate("auth/login");
+            // navigate("auth/login");
           });
         }
       }

@@ -28,7 +28,7 @@ const JobDetail = () => {
   const [job, setJob] = useState();
 
   useEffect(() => {
-    axios(`http://localhost:3000/allJobs/${id}`).then((data) => {
+    axios.get(`http://localhost:3000/allJobs/${id}`).then((data) => {
       setJob(data.data);
     });
   }, [axios, id]);
@@ -48,13 +48,11 @@ const JobDetail = () => {
     toast.loading("Loading...", { id: "accept-job" });
 
     try {
-      await axios.post("/acceptJob", {
+      await axios.post("/my-accepted-tasks", {
+        ...job,
         jobId: job._id,
         userEmail: user.email,
-        title: job.title,
-        coverImage: job.coverImage,
-        category: job.category,
-        price: job.price,
+        accepted_at: new Date().toISOString(),
       });
       toast.success("Job Accepted!", { id: "accept-job" });
     } catch (error) {
@@ -63,8 +61,6 @@ const JobDetail = () => {
       });
     }
   };
-
-
 
   return (
     <div className="min-h-screen bg-linear-to-br from-base-100 to-base-300 py-8 px-4">
