@@ -4,11 +4,12 @@ import { AuthContext } from "../context/AuthContext";
 import { toast } from "react-hot-toast";
 import useAxios from "../hook/useAxios";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
 const PostJob = () => {
   const { user } = useContext(AuthContext);
   const axios = useAxios();
-  
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,13 +48,16 @@ const PostJob = () => {
     console.log("Job Data:", jobData);
 
     try {
-      const res = await axios.post("/addJob", jobData);
+      await axios.post("/addJob", jobData);
       Swal.fire({
         title: "Job posted successfully!",
         icon: "success",
         draggable: true,
       });
       form.reset();
+      setTimeout(() => {
+        navigate("/all-jobs");
+      }, 1000);
     } catch (error) {
       console.error(error);
       toast.error(error.response?.data?.message || "Failed to post job");
@@ -69,9 +73,22 @@ const PostJob = () => {
         transition={{ duration: 0.4 }}
         className="bg-white w-full max-w-2xl rounded-2xl shadow-lg p-8 border border-secondary/30"
       >
-        <h2 className="text-3xl font-bold text-center text-primary mb-8">
-          Post a New Job
-        </h2>
+        <motion.h2
+                className="text-3xl font-semibold text-black text-center"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                Post A New Job
+              </motion.h2>
+              <motion.p
+                className="mb-5 text-gray-700 text-center"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                Create a new task and find the right person for the job
+              </motion.p>
 
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* Job Title */}

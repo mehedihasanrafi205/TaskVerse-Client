@@ -1,4 +1,4 @@
-import React, { use } from "react";
+import React, { use, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   Calendar,
@@ -13,18 +13,25 @@ import {
   Share2,
   CircleCheck,
 } from "lucide-react";
-import { Link, useLoaderData, useNavigate } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import toast from "react-hot-toast";
-import Loading from "daisyui/components/loading";
 import useAxios from "../hook/useAxios";
 import Swal from "sweetalert2";
+import Loading from "../components/Loading";
 
 const JobDetail = () => {
-  const job = useLoaderData();
   const navigate = useNavigate();
   const { user } = use(AuthContext);
   const axios = useAxios();
+  const { id } = useParams();
+  const [job, setJob] = useState();
+
+  useEffect(() => {
+    axios(`http://localhost:3000/allJobs/${id}`).then((data) => {
+      setJob(data.data);
+    });
+  }, [axios, id]);
 
   const randomYear = Math.floor(Math.random() * (2025 - 2010 + 1)) + 2010;
   const randomDay = Math.floor(Math.random() * (20 - 1 + 1)) + 1;
@@ -57,37 +64,7 @@ const JobDetail = () => {
     }
   };
 
-  const handleDelete = async () => {
-    const result = await Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    });
 
-    if (result.isConfirmed) {
-      try {
-        await axios.delete(`/deleteJob/${job._id}`);
-
-        await Swal.fire({
-          title: "Deleted!",
-          text: "Your post has been deleted.",
-          icon: "success",
-        });
-
-        navigate(-1);
-      } catch (error) {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: error.response?.data?.message || "Failed to delete post",
-        });
-      }
-    }
-  };
 
   return (
     <div className="min-h-screen bg-linear-to-br from-base-100 to-base-300 py-8 px-4">
@@ -152,7 +129,7 @@ const JobDetail = () => {
                   </div>
                   <div className="flex items-center gap-1 text-green-600 font-bold text-lg">
                     <DollarSign size={18} />
-                    <span>{job.price.toLocaleString()}</span>
+                    <span>{job.price?.toLocaleString()}</span>
                   </div>
                 </div>
 
@@ -356,17 +333,6 @@ const JobDetail = () => {
             </motion.div>
           </motion.div>
         </div>
-        <Link to={`/Update-job/${job._id}`} className="btn btn-primary my-5">
-          {" "}
-          Update Job
-        </Link>
-        <button
-          onClick={handleDelete}
-          className="btn btn-secondary btn-outline my-5"
-        >
-          {" "}
-          Delete job
-        </button>
       </div>
     </div>
   );

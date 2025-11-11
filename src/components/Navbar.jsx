@@ -2,7 +2,15 @@ import React, { use } from "react";
 import { Link, NavLink } from "react-router";
 import logo from "/logo.png";
 import { AuthContext } from "../context/AuthContext";
-import { BookCheck, CircleCheckBig, CirclePlus, House, TableOfContents, UserPen } from "lucide-react";
+import {
+  BookCheck,
+  CircleCheckBig,
+  CirclePlus,
+  House,
+  StickyNote,
+  TableOfContents,
+  UserPen,
+} from "lucide-react";
 
 const Navbar = () => {
   const { user, signOutUser } = use(AuthContext);
@@ -10,7 +18,6 @@ const Navbar = () => {
   const navItems = (
     <>
       <li>
-        
         <NavLink
           to="/"
           className="nav-link px-3 py-2 font-medium hover:text-secondary transition-colors duration-200"
@@ -24,7 +31,7 @@ const Navbar = () => {
           to="/all-jobs"
           className="nav-link px-3 py-2 font-medium hover:text-secondary transition-colors duration-200"
         >
-          <TableOfContents size={17}/>
+          <TableOfContents size={17} />
           All Jobs
         </NavLink>
       </li>
@@ -35,8 +42,17 @@ const Navbar = () => {
               to="/add-job"
               className="nav-link px-3 py-2 font-medium hover:text-secondary transition-colors duration-200"
             >
-              <CirclePlus size={17}/>
+              <CirclePlus size={17} />
               Add a Job
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/added-jobs"
+              className="nav-link px-3 py-2 font-medium hover:text-secondary transition-colors duration-200"
+            >
+              <StickyNote size={17} />
+              My Added Jobs
             </NavLink>
           </li>
           <li>
@@ -44,7 +60,7 @@ const Navbar = () => {
               to="/accepted-tasks"
               className="nav-link px-3 py-2 font-medium hover:text-secondary transition-colors duration-200"
             >
-              <CircleCheckBig size={17}/>
+              <CircleCheckBig size={17} />
               My Accepted Tasks
             </NavLink>
           </li>
@@ -56,9 +72,7 @@ const Navbar = () => {
   return (
     <header className=" z-50 bg-linear-to-r from-primary to-[#053738] text-primary-content shadow-lg border-b border-secondary/50">
       <nav className="navbar container mx-auto py-3">
-      
         <div className="navbar-start">
-       
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
@@ -84,7 +98,6 @@ const Navbar = () => {
             </ul>
           </div>
 
-      
           <Link to="/" className="flex items-center gap-2">
             <img
               src={logo}
@@ -136,7 +149,7 @@ const Navbar = () => {
                     to="/profile"
                     className="hover:bg-secondary/20 rounded-md transition"
                   >
-                    <UserPen size={15}/>
+                    <UserPen size={15} />
                     Profile
                   </Link>
                 </li>

@@ -11,6 +11,7 @@ import PrivateRoute from "./PrivateRouter";
 import Profile from "../pages/Profile";
 import JobDetail from "../pages/JobDetail";
 import UpdateJob from "../pages/updateJob";
+import MyAddedJobs from "../pages/MyAddedJobs";
 
 export const router = createBrowserRouter([
   {
@@ -33,8 +34,6 @@ export const router = createBrowserRouter([
             <JobDetail></JobDetail>
           </PrivateRoute>
         ),
-        loader: ({ params }) =>
-          fetch(`http://localhost:3000/allJobs/${params.id}`),
       },
       {
         path: "add-job",
@@ -51,8 +50,14 @@ export const router = createBrowserRouter([
             <UpdateJob></UpdateJob>
           </PrivateRoute>
         ),
-        loader: ({ params }) =>
-          fetch(`http://localhost:3000/allJobs/${params.id}`),
+      },
+      {
+        path: "added-jobs",
+        element: (
+          <PrivateRoute>
+            <MyAddedJobs></MyAddedJobs>
+          </PrivateRoute>
+        ),
       },
       {
         path: "accepted-tasks",

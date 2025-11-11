@@ -1,17 +1,25 @@
-import { use } from "react";
+import { use, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { motion } from "framer-motion";
-import { useLoaderData, useLocation, useNavigate } from "react-router";
+import {  useNavigate, useParams } from "react-router";
 import toast from "react-hot-toast";
 import useAxios from "../hook/useAxios";
+import Swal from "sweetalert2";
 
 const UpdateJob = () => {
-  const job = useLoaderData();
-
+  const [job, setJob] = useState({});
   const { user } = use(AuthContext);
   const axios = useAxios();
-  const location = useLocation();
+
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  useEffect(() => {
+    axios(`http://localhost:3000/allJobs/${id}`).then((data) => {
+      setJob(data.data);
+    });
+  }, [axios, id]);
+  console.log(job.category);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,16 +50,23 @@ const UpdateJob = () => {
     };
 
     try {
-      const res = await axios.put(`/updateJob/${job._id}`, jobData);
-      toast.success("Job Update successfully!");
+      await axios.put(`/updateJob/${job._id}`, jobData);
+      Swal.fire({
+        title: "Job Update successfully!",
+        icon: "success",
+        draggable: true,
+      });
       form.reset();
       setTimeout(() => {
-        navigate(location?.state || "/");
-        window.location.reload();
-      }, 2000);
+        navigate(-1);
+      }, 1000);
     } catch (error) {
       console.error(error);
-      toast.error(error.response?.data?.message || "Failed to Update the job");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.response?.data?.message || "Failed to delete post",
+      });
     }
   };
   return (
@@ -63,9 +78,22 @@ const UpdateJob = () => {
         transition={{ duration: 0.4 }}
         className="bg-white w-full max-w-2xl rounded-2xl shadow-lg p-8 border border-secondary/30"
       >
-        <h2 className="text-3xl font-bold text-center text-primary mb-8">
-          Update The Post
-        </h2>
+        <motion.h2
+        className="text-3xl font-semibold text-black text-center"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        Update The Post
+      </motion.h2>
+      <motion.p
+        className="mb-5 text-gray-700 text-center"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
+        Edit and update your job posting details
+      </motion.p>
 
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* Job Title */}
@@ -89,8 +117,9 @@ const UpdateJob = () => {
               Category *
             </label>
             <select
-              defaultValue={job.category}
+              value={job.category || ""}
               name="category"
+              onChange={(e) => setJob({ ...job, category: e.target.value })}
               className="select select-bordered w-full"
               required
             >

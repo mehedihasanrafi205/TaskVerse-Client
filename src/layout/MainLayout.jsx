@@ -9,17 +9,17 @@ const MainLayout = () => {
   return (
     <div className="flex flex-col min-h-screen bg-base-300">
       <Navbar />
-      <ClickSpark
-        sparkColor="#f7ce3e"
-        sparkSize={10}
-        sparkRadius={15}
-        sparkCount={8}
-        duration={400}
-      >
-        <section className="flex-1">
+      <section className="flex-1">
+        <ClickSpark
+          sparkColor="#f7ce3e"
+          sparkSize={10}
+          sparkRadius={15}
+          sparkCount={8}
+          duration={400}
+        >
           <Outlet />
-        </section>
-      </ClickSpark>
+        </ClickSpark>
+      </section>
       <Footer />
     </div>
   );

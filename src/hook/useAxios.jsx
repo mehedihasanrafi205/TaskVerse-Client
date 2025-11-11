@@ -2,7 +2,7 @@ import axios from "axios";
 import useAuth from "./useAuth";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
-// import { useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
 const instance = axios.create({
   baseURL: "http://localhost:3000",
@@ -10,7 +10,7 @@ const instance = axios.create({
 
 const useAxios = () => {
   const { user, signOutUser } = useAuth();
-  // const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const requestInterceptor = instance.interceptors.request.use((config) => {
@@ -31,7 +31,7 @@ const useAxios = () => {
           toast.error(" Log out the user for bad intention");
           console.log(" Log out the user for bad intention");
           signOutUser().then(() => {
-            // Navigate user to the login page
+            navigate("auth/login");
           });
         }
       }
@@ -41,7 +41,7 @@ const useAxios = () => {
       instance.interceptors.request.eject(requestInterceptor);
       instance.interceptors.response.eject(responseInterceptor);
     };
-  }, [user, signOutUser]);
+  }, [user, signOutUser,navigate]);
 
   return instance;
 };
