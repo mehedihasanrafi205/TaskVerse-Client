@@ -25,7 +25,7 @@ export const router = createBrowserRouter([
       {
         path: "all-jobs",
         Component: AllJobs,
-        loader: () => fetch("http://localhost:3000/allJobs"),
+        loader: () => fetch("https://taskverse-server.vercel.app/allJobs"),
       },
       {
         path: "job-detail/:id",

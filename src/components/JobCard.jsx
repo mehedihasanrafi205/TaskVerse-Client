@@ -27,7 +27,7 @@ const JobCard = ({ job }) => {
       <motion.div
         whileHover={{ scale: 1.02, boxShadow: "0 0 5px 2px #f7ce3e" }}
         transition={{ type: "spring", stiffness: 300 }}
-        className="group bg-white border border-gray-200 hover:border-secondary rounded-2xl shadow-lg overflow-hidden cursor-pointer transition-all duration-300"
+        className="group bg-base-200/80  border border-secondary/20 hover:border-secondary rounded-2xl shadow-lg overflow-hidden cursor-pointer transition-all duration-300"
       >
        
         <div className="relative overflow-hidden h-56">
@@ -46,21 +46,21 @@ const JobCard = ({ job }) => {
 
         
         <div className="p-5 flex flex-col gap-3">
-          <h2 className="text-2xl font-bold text-gray-800 group-hover:text-secondary transition-colors duration-300">
+          <h2 className="text-2xl font-bold text-primary-content group-hover:text-secondary transition-colors duration-300">
             {title}
           </h2>
 
-          <p className="text-gray-600 text-sm line-clamp-5">{description}</p>
+          <p className="text-primary-content/70 text-sm line-clamp-5">{description}</p>
 
          
-          <div className="flex items-center justify-between mt-3 text-sm text-gray-500">
+          <div className="flex items-center justify-between mt-3 text-sm text-secondary/90">
             <div className="flex items-center gap-2">
               <img
                 src={postedByImage}
                 alt={postedBy}
-                className="w-8 h-8 rounded-full object-cover border border-gray-300"
+                className="w-8 h-8 rounded-full object-cover border border-secondary/30"
               />
-              <span className="font-medium">{postedBy}</span>
+              <span className="font-medium ">{postedBy}</span>
             </div>
 
             <div className="flex items-center gap-1 text-green-600 font-semibold">

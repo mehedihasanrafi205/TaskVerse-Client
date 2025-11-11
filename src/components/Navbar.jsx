@@ -1,19 +1,29 @@
-import React, { use } from "react";
+import React, { use, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router";
 import logo from "/logo.png";
 import { AuthContext } from "../context/AuthContext";
 import {
   BookCheck,
+  Briefcase,
   CircleCheckBig,
   CirclePlus,
   House,
+  Moon,
   StickyNote,
+  Sun,
   TableOfContents,
   UserPen,
 } from "lucide-react";
 
 const Navbar = () => {
   const { user, signOutUser } = use(AuthContext);
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+  useEffect(() => {
+    const html = document.querySelector("html");
+    html.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   const navItems = (
     <>
@@ -68,6 +78,10 @@ const Navbar = () => {
       )}
     </>
   );
+
+  const handleTheme = (checked) => {
+    setTheme(checked ? "dark" : "light");
+  };
 
   return (
     <header className=" z-50 bg-linear-to-r from-primary to-[#053738] text-primary-content shadow-lg border-b border-secondary/50">
@@ -137,7 +151,7 @@ const Navbar = () => {
 
               <ul
                 tabIndex={-1}
-                className="menu menu-sm dropdown-content bg-base-300 text-base-content rounded-box shadow-lg mt-3  p-3"
+                className="menu menu-sm dropdown-content bg-base-300 text-base-content rounded-box shadow-lg mt-3 p-3"
               >
                 <div className="px-3 py-2 border-b border-gray-300/40 mb-2">
                   <p className="text-lg font-semibold">{user?.displayName}</p>
@@ -147,26 +161,62 @@ const Navbar = () => {
                 <li>
                   <Link
                     to="/profile"
-                    className="hover:bg-secondary/20 rounded-md transition"
+                    className="flex items-center gap-2 hover:bg-secondary/20 rounded-md px-3 py-2 transition"
                   >
-                    <UserPen size={15} />
-                    Profile
+                    <UserPen size={16} /> Profile
                   </Link>
                 </li>
                 <li>
                   <Link
                     to="/accepted-tasks"
-                    className="hover:bg-secondary/20 rounded-md transition"
+                    className="flex items-center gap-2 hover:bg-secondary/20 rounded-md px-3 py-2 transition"
                   >
-                    <BookCheck size={15} />
-                    My Tasks
+                    <BookCheck size={16} /> My Tasks
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/my-jobs"
+                    className="flex items-center gap-2 hover:bg-secondary/20 rounded-md px-3 py-2 transition"
+                  >
+                    <Briefcase size={16} /> My Jobs
                   </Link>
                 </li>
 
                 <li className="mt-2">
+                  <div className="flex items-center justify-between px-3 py-2 rounded-md hover:bg-secondary/20 transition">
+                    <span className="flex items-center gap-2 font-medium text-sm">
+                      <Sun size={16} />
+                      Theme
+                    </span>
+
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <Sun
+                        size={16}
+                        className="text-yellow-400 transition-transform duration-300"
+                      />
+
+                      <input
+                        onChange={(e) => handleTheme(e.target.checked)}
+                        type="checkbox"
+                        defaultChecked={
+                          localStorage.getItem("theme") === "dark"
+                        }
+                        className="toggle theme-controller bg-secondary/30 border-secondary/40 scale-90"
+                      />
+
+                      <Moon
+                        size={16}
+                        className="text-green-800 transition-transform duration-300"
+                      />
+                    </label>
+                  </div>
+                </li>
+                {/* Logout Button */}
+                <li className="mt-2">
                   <button
                     onClick={signOutUser}
-                    className="btn btn-secondary w-full text-primary font-semibold hover:opacity-90"
+                    className="btn btn-secondary h-8 w-full text-primary font-semibold hover:opacity-90"
                   >
                     Logout
                   </button>

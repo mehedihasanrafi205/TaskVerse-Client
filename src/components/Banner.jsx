@@ -49,17 +49,28 @@ const BannerColumn = ({ direction = "down" }) => {
 const Banner = () => {
   return (
     <section className="relative w-full h-screen overflow-hidden flex items-center justify-center border-b border-secondary">
-    
-      <div className="absolute inset-0 bg-linear-to-b from-[#042A2B]/80 via-[#0A7373]/50 to-transparent"></div>
-
-      
-      <div className="absolute z-10 text-center px-4">
-        <h1 className="text-5xl md:text-6xl font-bold mb-4 text-white  drop-shadow-[0_4px_10px_rgba(0,0,0,0.6)]">
+      <div className="absolute inset-0 bg-linear-to-b from-[#042A2B]/90 via-[#0A7373]/80 to-[#042A2B]/90"></div>
+      <div className="absolute inset-0 bg-black/50 z-5"></div>
+      <div className="absolute z-10 text-center px-4 ">
+        <motion.h1
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="text-4xl md:text-6xl font-bold bg-linear-to-r  from-[#f7ce3e] via-[#FFD84C] to-[#f7ce3e] bg-clip-text text-transparent mb-4 drop-shadow-lg"
+        >
           Turn Your Skills Into Opportunity
-        </h1>
-        <p className="text-xl md:text-2xl text-[#E0F2F1] drop-shadow-[0_2px_6px_rgba(0,0,0,0.5)]">
-          Work with global clients and build the career you deserve.
-        </p>
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 1 }}
+          className="text-lg md:text-2xl text-gray-300 mb-6 drop-shadow-md"
+        >
+          Connect with clients worldwide and grow your career with real
+          opportunities.
+        </motion.p>
+
         <div className="space-x-3 mt-4">
           <Link to={"/all-jobs"}>
             <motion.button
@@ -82,7 +93,6 @@ const Banner = () => {
         </div>
       </div>
 
-      
       <div className="absolute inset-0 flex justify-center gap-4 px-2 md:px-8">
         {[0, 1, 2, 3, 4].map((i) => (
           <BannerColumn key={i} direction={i % 2 === 0 ? "down" : "up"} />

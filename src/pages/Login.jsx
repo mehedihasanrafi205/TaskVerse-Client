@@ -157,14 +157,14 @@ const Login = () => {
         </motion.div>
       </motion.div>
 
-      <div className="flex items-center justify-center bg-base-100 p-6">
+      <div className="flex items-center justify-center bg-base-300 p-6">
         <motion.div
           className="w-full max-w-md"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <div className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-100">
+          <div className="bg-base-200/80  rounded-2xl shadow-2xl p-8 border border-secondary/50">
             <div className="text-center mb-8">
               <motion.div
                 className="inline-block"
@@ -184,7 +184,7 @@ const Login = () => {
                   <img src={logo} alt="" />
                 </Link>
               </motion.div>
-              <h2 className="text-3xl font-bold text-primary mb-2">
+              <h2 className="text-3xl font-bold text-primary-content mb-2">
                 Welcome Back
               </h2>
               <p className="text-gray-500">Sign in to continue to TaskVerse</p>
@@ -229,13 +229,13 @@ const Login = () => {
                     name="password"
                     type={showPassword ? "text" : "password"}
                     placeholder="••••••••"
-                    className="input input-bordered w-full pl-12 pr-12 focus:border-secondary focus:outline-none transition-colors"
+                    className="input input-bordered w-full pl-12 pr-12 focus:border-secondary focus:outline-none transition-colors "
                     required
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors z-10"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-secondary/80 transition-colors z-10 cursor-pointer "
                     tabIndex={-1}
                   >
                     {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -273,7 +273,7 @@ const Login = () => {
               <motion.button
                 onClick={handleGoogleSignIn}
                 type="button"
-                className="btn btn-outline w-full border-gray-300 hover:bg-gray-50 hover:border-gray-400 transition-all"
+                className="btn btn-outline w-full text-primary-content hover:text-primary border-gray-300 hover:bg-gray-50 hover:border-gray-400 transition-all"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >

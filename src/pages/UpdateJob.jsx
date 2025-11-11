@@ -1,24 +1,24 @@
 import { use, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { motion } from "framer-motion";
-import {  useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import toast from "react-hot-toast";
 import useAxios from "../hook/useAxios";
 import Swal from "sweetalert2";
 
 const UpdateJob = () => {
   const [job, setJob] = useState({});
-  const { user } = use(AuthContext);
+  const { user, setRefetch, refetch } = use(AuthContext);
   const axios = useAxios();
 
   const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
-    axios(`http://localhost:3000/allJobs/${id}`).then((data) => {
+    axios.get(`/allJobs/${id}`).then((data) => {
       setJob(data.data);
     });
-  }, [axios, id]);
+  }, [axios, id, refetch]);
   console.log(job.category);
 
   const handleSubmit = async (e) => {
@@ -57,6 +57,7 @@ const UpdateJob = () => {
         draggable: true,
       });
       form.reset();
+      setRefetch(!refetch);
       setTimeout(() => {
         navigate(-1);
       }, 1000);
@@ -76,29 +77,29 @@ const UpdateJob = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="bg-white w-full max-w-2xl rounded-2xl shadow-lg p-8 border border-secondary/30"
+        className="bg-base-200 w-full max-w-2xl rounded-2xl shadow-lg p-8 border border-secondary/30"
       >
         <motion.h2
-        className="text-3xl font-semibold text-black text-center"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        Update The Post
-      </motion.h2>
-      <motion.p
-        className="mb-5 text-gray-700 text-center"
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-      >
-        Edit and update your job posting details
-      </motion.p>
+          className="text-3xl font-semibold text-primary-content text-center"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          Update The Post
+        </motion.h2>
+        <motion.p
+          className="mb-5 text-secondary-content text-center"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          Edit and update your job posting details
+        </motion.p>
 
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* Job Title */}
           <div>
-            <label className="block font-medium text-primary mb-1">
+            <label className="block font-medium text-primary-content mb-1">
               Job Title *
             </label>
             <input
@@ -113,7 +114,7 @@ const UpdateJob = () => {
 
           {/* Category */}
           <div>
-            <label className="block font-medium text-primary mb-1">
+            <label className="block font-medium text-primary-content mb-1">
               Category *
             </label>
             <select
@@ -140,7 +141,7 @@ const UpdateJob = () => {
 
           {/* Price */}
           <div>
-            <label className="block font-medium text-primary mb-1">
+            <label className="block font-medium text-primary-content mb-1">
               Budget / Price ($) *
             </label>
             <input
@@ -155,7 +156,7 @@ const UpdateJob = () => {
 
           {/* Summary */}
           <div>
-            <label className="block font-medium text-primary mb-1">
+            <label className="block font-medium text-primary-content mb-1">
               Short Summary *
             </label>
             <input
@@ -170,7 +171,7 @@ const UpdateJob = () => {
 
           {/* Description */}
           <div>
-            <label className="block font-medium text-primary mb-1">
+            <label className="block font-medium text-primary-content mb-1">
               Full Description *
             </label>
             <textarea
@@ -185,7 +186,7 @@ const UpdateJob = () => {
 
           {/* Skills */}
           <div>
-            <label className="block font-medium text-primary mb-1">
+            <label className="block font-medium text-primary-content mb-1">
               Skills (comma separated)
             </label>
             <input
@@ -199,7 +200,7 @@ const UpdateJob = () => {
 
           {/* Experience Required */}
           <div>
-            <label className="block font-medium text-primary mb-1">
+            <label className="block font-medium text-primary-content mb-1">
               Experience Required
             </label>
             <input
@@ -213,7 +214,7 @@ const UpdateJob = () => {
 
           {/* Cover Image */}
           <div>
-            <label className="block font-medium text-primary mb-1">
+            <label className="block font-medium text-primary-content mb-1">
               Cover Image URL *
             </label>
             <input
@@ -229,14 +230,14 @@ const UpdateJob = () => {
           {/* Posted By Info */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block font-medium text-primary mb-1">
+              <label className="block font-medium text-primary-content mb-1">
                 Posted By
               </label>
               <input
                 type="text"
                 value={user?.displayName || ""}
                 readOnly
-                className="input input-bordered w-full bg-gray-100"
+                className="input input-bordered w-full "
               />
             </div>
             <div>
@@ -247,7 +248,7 @@ const UpdateJob = () => {
                 type="email"
                 value={user?.email || ""}
                 readOnly
-                className="input input-bordered w-full bg-gray-100"
+                className="input input-bordered w-full "
               />
             </div>
           </div>

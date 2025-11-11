@@ -18,7 +18,7 @@ import { Link } from "react-router";
 import toast from "react-hot-toast";
 
 const MyAcceptedTasks = () => {
-  const { user } = use(AuthContext);
+  const { user, refetch, setRefetch } = use(AuthContext);
   const axios = useAxios();
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -37,7 +37,7 @@ const MyAcceptedTasks = () => {
           setLoading(false);
         });
     }
-  }, [axios, user]);
+  }, [axios, user, refetch]);
 
   const handleRemove = async (id, type) => {
     const removedTask = tasks.find((task) => task._id === id);
@@ -45,7 +45,7 @@ const MyAcceptedTasks = () => {
 
     try {
       await axios.delete(`/my-accepted-tasks/${id}`);
-
+      setRefetch(!refetch);
       {
         type === "done"
           ? toast.success("Task Completed!")
@@ -70,10 +70,10 @@ const MyAcceptedTasks = () => {
         <div className="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-6">
           <FileCheck className="w-12 h-12 text-gray-400" />
         </div>
-        <h3 className="text-2xl font-bold text-gray-800 mb-2">
+        <h3 className="text-2xl font-bold text-primary-content mb-2">
           No tasks accepted yet
         </h3>
-        <p className="text-gray-600 mb-6">
+        <p className="text-secondary-content mb-6">
           Start by accepting your first task to get going.
         </p>
         <Link to="/all-jobs">
@@ -87,12 +87,12 @@ const MyAcceptedTasks = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] py-10 px-4">
+    <div className="min-h-screen  py-10 px-4">
       <div className="container mx-auto max-w-5xl">
         {/* Header */}
         <div className="flex flex-col items-center justify-center gap-1 mb-2">
           <motion.h2
-            className="text-3xl font-semibold text-black text-center"
+            className="text-3xl font-semibold text-primary-content text-center"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -100,7 +100,7 @@ const MyAcceptedTasks = () => {
             My Accepted Task
           </motion.h2>
           <motion.p
-            className="mb-5 text-gray-700 text-center"
+            className="mb-5 text-secondary-content/80 text-center"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -123,9 +123,8 @@ const MyAcceptedTasks = () => {
                   marginBottom: 0,
                   transition: { duration: 0.3 },
                 }}
-                className="bg-white border  border-secondary/30 hover:border-secondary/60shadow-md rounded-2xl overflow-hidden hover:shadow-xl transition-all flex flex-col md:flex-row "
+                className="bg-base-200/80 border  border-secondary/30 hover:border-secondary/60shadow-md rounded-2xl overflow-hidden hover:shadow-xl transition-all flex flex-col md:flex-row "
               >
-               
                 <div className="md:w-1/3 h-[220px] overflow-hidden relative">
                   <img
                     src={
@@ -134,31 +133,30 @@ const MyAcceptedTasks = () => {
                     alt={task.title}
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                   />
-                
+
                   <span className="absolute top-3 left-3 bg-[#042A2B]/90 text-[#F7CE3E] text-xs font-semibold px-3 py-1 rounded-full shadow-md">
                     In Progress
                   </span>
                 </div>
 
-                
                 <div className="flex-1 p-5 flex flex-col justify-between">
                   <div>
                     <div className="flex justify-between items-start mb-1">
-                      <h3 className="text-lg font-semibold text-[#042A2B] line-clamp-1">
+                      <h3 className="text-lg font-semibold text-primary-content line-clamp-1">
                         {task.title}
                       </h3>
-                      <span className="badge badge-outline border-[#F7CE3E] text-[#042A2B] bg-[#F7CE3E]/20">
+                      <span className="badge badge-outline border-[#F7CE3E] text-secondary-content/90 bg-[#F7CE3E]/20">
                         <Tag size={14} className="mr-1" />
                         {task.category || "General"}
                       </span>
                     </div>
 
-                    <p className="text-gray-700 mb-3 leading-snug text-sm line-clamp-2">
+                    <p className="text-secondary-content/80 mb-3 leading-snug text-sm line-clamp-2">
                       {task.summary ||
                         "Complete this task following the best freelance practices."}
                     </p>
 
-                    <div className="flex gap-4 text-xs text-gray-600">
+                    <div className="flex gap-4 text-xs text-secondary-content/60">
                       <div className="flex items-center gap-1">
                         <User size={13} />
                         <span>{task.postedBy || "Client"}</span>
@@ -179,13 +177,12 @@ const MyAcceptedTasks = () => {
                     </div>
                   </div>
 
-              
                   <div className="mt-3 flex gap-3">
                     <motion.button
                       whileHover={{ scale: 1.03 }}
                       whileTap={{ scale: 0.97 }}
                       onClick={() => handleRemove(task._id, "done")}
-                      className="btn  bg-[#042A2B] text-white border-none hover:bg-[#063637]"
+                      className="btn  bg-primary-content text-base-200 border-none hover:bg-primary-content/80"
                     >
                       <Check size={14} />
                       Done

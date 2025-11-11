@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
 
 const PostJob = () => {
-  const { user } = useContext(AuthContext);
+  const { user, setRefetch,refetch } = useContext(AuthContext);
   const axios = useAxios();
   const navigate = useNavigate();
 
@@ -55,6 +55,7 @@ const PostJob = () => {
         draggable: true,
       });
       form.reset();
+      setRefetch(!refetch);
       setTimeout(() => {
         navigate("/all-jobs");
       }, 1000);
@@ -65,35 +66,35 @@ const PostJob = () => {
   };
 
   return (
-    <div className="min-h-screen bg-base-300 py-15 flex justify-center items-center">
+    <div className="min-h-screen  py-15 flex justify-center items-center">
       <motion.div
         whileHover={{ boxShadow: "0 0 5px 2px #f7ce3e" }}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="bg-white w-full max-w-2xl rounded-2xl shadow-lg p-8 border border-secondary/30"
+        className="bg-base-200/80 w-full max-w-2xl rounded-2xl shadow-lg p-8 border border-secondary/30"
       >
         <motion.h2
-                className="text-3xl font-semibold text-black text-center"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                Post A New Job
-              </motion.h2>
-              <motion.p
-                className="mb-5 text-gray-700 text-center"
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                Create a new task and find the right person for the job
-              </motion.p>
+          className="text-3xl font-semibold text-primary-content text-center"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          Post A New Job
+        </motion.h2>
+        <motion.p
+          className="mb-5 text-secondary-content text-center"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          Create a new task and find the right person for the job
+        </motion.p>
 
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* Job Title */}
           <div>
-            <label className="block font-medium text-primary mb-1">
+            <label className="block font-medium text-primary-content mb-1">
               Job Title *
             </label>
             <input
@@ -107,7 +108,7 @@ const PostJob = () => {
 
           {/* Category */}
           <div>
-            <label className="block font-medium text-primary mb-1">
+            <label className="block font-medium text-primary-content mb-1">
               Category *
             </label>
             <select
@@ -132,7 +133,7 @@ const PostJob = () => {
 
           {/* Price */}
           <div>
-            <label className="block font-medium text-primary mb-1">
+            <label className="block font-medium text-primary-content mb-1">
               Budget / Price ($) *
             </label>
             <input
@@ -146,7 +147,7 @@ const PostJob = () => {
 
           {/* Summary */}
           <div>
-            <label className="block font-medium text-primary mb-1">
+            <label className="block font-medium text-primary-content mb-1">
               Short Summary *
             </label>
             <input
@@ -160,7 +161,7 @@ const PostJob = () => {
 
           {/* Description */}
           <div>
-            <label className="block font-medium text-primary mb-1">
+            <label className="block font-medium text-primary-content mb-1">
               Full Description *
             </label>
             <textarea
@@ -174,7 +175,7 @@ const PostJob = () => {
 
           {/* Skills */}
           <div>
-            <label className="block font-medium text-primary mb-1">
+            <label className="block font-medium text-primary-content mb-1">
               Skills (comma separated)
             </label>
             <input
@@ -187,7 +188,7 @@ const PostJob = () => {
 
           {/* Experience Required */}
           <div>
-            <label className="block font-medium text-primary mb-1">
+            <label className="block font-medium text-primary-content mb-1">
               Experience Required
             </label>
             <input
@@ -200,7 +201,7 @@ const PostJob = () => {
 
           {/* Cover Image */}
           <div>
-            <label className="block font-medium text-primary mb-1">
+            <label className="block font-medium text-primary-content mb-1">
               Cover Image URL *
             </label>
             <input
@@ -215,14 +216,14 @@ const PostJob = () => {
           {/* Posted By Info */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block font-medium text-primary mb-1">
+              <label className="block font-medium text-primary-content mb-1">
                 Posted By
               </label>
               <input
                 type="text"
                 value={user?.displayName || ""}
                 readOnly
-                className="input input-bordered w-full bg-gray-100"
+                className="input input-bordered w-full "
               />
             </div>
             <div>
@@ -233,7 +234,7 @@ const PostJob = () => {
                 type="email"
                 value={user?.email || ""}
                 readOnly
-                className="input input-bordered w-full bg-gray-100"
+                className="input input-bordered w-full "
               />
             </div>
           </div>

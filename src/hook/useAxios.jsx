@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 
 const instance = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://taskverse-server.vercel.app",
 });
 
 const useAxios = () => {
@@ -41,7 +41,7 @@ const useAxios = () => {
       instance.interceptors.request.eject(requestInterceptor);
       instance.interceptors.response.eject(responseInterceptor);
     };
-  }, [user, signOutUser,navigate]);
+  }, [user, signOutUser, navigate]);
 
   return instance;
 };

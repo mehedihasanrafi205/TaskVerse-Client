@@ -12,6 +12,7 @@ import {
   Heart,
   Share2,
   CircleCheck,
+  BadgeCheck,
 } from "lucide-react";
 import { Link, useNavigate, useParams } from "react-router";
 import { AuthContext } from "../context/AuthContext";
@@ -22,16 +23,16 @@ import Loading from "../components/Loading";
 
 const JobDetail = () => {
   const navigate = useNavigate();
-  const { user } = use(AuthContext);
+  const { user,refetch } = use(AuthContext);
   const axios = useAxios();
   const { id } = useParams();
   const [job, setJob] = useState();
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/allJobs/${id}`).then((data) => {
+    axios.get(`/allJobs/${id}`).then((data) => {
       setJob(data.data);
     });
-  }, [axios, id]);
+  }, [axios, id,refetch]);
 
   const randomYear = Math.floor(Math.random() * (2025 - 2010 + 1)) + 2010;
   const randomDay = Math.floor(Math.random() * (20 - 1 + 1)) + 1;
@@ -70,7 +71,7 @@ const JobDetail = () => {
           onClick={() => navigate(-1)}
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="flex items-center gap-2 text-gray-600 hover:text-[#f7ce3e] transition-colors mb-6 cursor-pointer"
+          className="flex items-center gap-2 text-secondary-content/80 hover:text-[#f7ce3e] transition-colors mb-6 cursor-pointer"
         >
           <ArrowLeft size={20} />
           <span>Back to Jobs</span>
@@ -90,7 +91,7 @@ const JobDetail = () => {
                 boxShadow: "0 0 15px 5px #f7ce3e",
               }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="bg-white rounded-xl shadow-xl overflow-hidden border border-secondary/50"
+              className="bg-base-200/80 rounded-xl shadow-xl overflow-hidden border border-secondary/50"
             >
               {/* Cover Image */}
               <div className="relative h-72 overflow-hidden">
@@ -111,13 +112,13 @@ const JobDetail = () => {
 
               {/* Title Section */}
               <div className="p-8">
-                <h1 className="text-4xl font-bold text-gray-900 mb-4 leading-tight">
+                <h1 className="text-4xl font-bold text-primary-content mb-4 leading-tight">
                   {job.title}
                 </h1>
 
                 {/* Quick Stats */}
                 <div className="flex flex-wrap gap-4 mb-6">
-                  <div className="flex items-center gap-2 text-gray-600">
+                  <div className="flex items-center gap-2 text-secondary-content/60">
                     <Calendar size={18} />
                     <span className="text-sm">
                       Posted {new Date(job.created_at).toLocaleDateString()}
@@ -163,30 +164,30 @@ const JobDetail = () => {
             <motion.div
               whileHover={{ boxShadow: "0 0 12px #f7ce3e" }}
               transition={{ duration: 0.3 }}
-              className="bg-white rounded-xl shadow-lg p-8 border border-secondary/50"
+              className="bg-base-200/80 rounded-xl shadow-lg p-8 border border-secondary/50"
             >
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-8 h-8 bg-[#f7ce3e]/10 rounded-lg flex items-center justify-center">
                   <Briefcase size={18} className="text-[#f7ce3e]" />
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900">
+                <h2 className="text-2xl font-bold text-primary-content">
                   Job Summary
                 </h2>
               </div>
-              <p className="text-gray-700 leading-relaxed">{job.summary}</p>
+              <p className="text-secondary-content/80 leading-relaxed">{job.summary}</p>
             </motion.div>
 
             {/* Full Description */}
             <motion.div
               whileHover={{ boxShadow: "0 0 12px #f7ce3e" }}
               transition={{ duration: 0.3 }}
-              className="bg-white rounded-xl shadow-lg p-8 border border-secondary/50"
+              className="bg-base-200/80 rounded-xl shadow-lg p-8 border border-secondary/50"
             >
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl font-bold text-primary-content mb-4">
                 Full Description
               </h2>
               <div className="prose prose-gray max-w-none">
-                <p className="text-gray-700 leading-relaxed whitespace-pre-line">
+                <p className="text-secondary-content/80  leading-relaxed whitespace-pre-line">
                   {job.description}
                 </p>
               </div>
@@ -197,13 +198,13 @@ const JobDetail = () => {
               <motion.div
                 whileHover={{ boxShadow: "0 0 12px #f7ce3e" }}
                 transition={{ duration: 0.3 }}
-                className="bg-white rounded-xl shadow-lg p-8 border border-secondary/50"
+                className="bg-base-200/80 rounded-xl shadow-lg p-8 border border-secondary/50"
               >
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-8 h-8 bg-[#f7ce3e]/10 rounded-lg flex items-center justify-center">
                     <Tag size={18} className="text-[#f7ce3e]" />
                   </div>
-                  <h2 className="text-2xl font-bold text-gray-900">
+                  <h2 className="text-2xl font-bold text-primary-content">
                     Skills Required
                   </h2>
                 </div>
@@ -226,17 +227,17 @@ const JobDetail = () => {
               <motion.div
                 whileHover={{ boxShadow: "0 0 12px #f7ce3e" }}
                 transition={{ duration: 0.3 }}
-                className="bg-white rounded-xl shadow-lg p-8 border border-secondary/50"
+                className="bg-base-200/80 rounded-xl shadow-lg p-8 border border-secondary/50"
               >
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-8 h-8 bg-[#f7ce3e]/10 rounded-lg flex items-center justify-center">
                     <Award size={18} className="text-[#f7ce3e]" />
                   </div>
-                  <h2 className="text-2xl font-bold text-gray-900">
+                  <h2 className="text-2xl font-bold text-primary-content">
                     Experience Required
                   </h2>
                 </div>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-secondary-content/80 leading-relaxed">
                   {job.experienceRequired}
                 </p>
               </motion.div>
@@ -254,9 +255,9 @@ const JobDetail = () => {
             <motion.div
               whileHover={{ boxShadow: "0 0 12px #f7ce3e" }}
               transition={{ duration: 0.3 }}
-              className="bg-white rounded-xl shadow-lg p-6 border border-secondary/50 sticky top-6"
+              className="bg-base-200 rounded-xl shadow-lg p-6 border border-secondary/50 sticky top-6"
             >
-              <h3 className="text-lg font-bold text-gray-900 mb-4">
+              <h3 className="text-lg font-bold text-primary-content mb-4">
                 Posted By
               </h3>
               <div className="flex items-center gap-4 mb-6">
@@ -268,11 +269,11 @@ const JobDetail = () => {
                   />
                 </div>
                 <div>
-                  <p className="font-bold text-gray-900">{job.postedBy}</p>
-                  <p className="text-sm text-gray-500 flex items-center gap-1">
+                  <p className="font-bold text-primary-content/90">{job.postedBy}</p>
+                  <p className="text-sm text-secondary-content/70 flex items-center gap-1">
                     {" "}
                     <span className="text-green-600">
-                      <CircleCheck size={17} />
+                      <BadgeCheck size={17} />
                     </span>
                     Verified Client
                   </p>
@@ -281,17 +282,17 @@ const JobDetail = () => {
 
               {/* Contact Info */}
               <div className="space-y-3 mb-6">
-                <div className="flex items-center gap-3 text-gray-600">
-                  <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
+                <div className="flex items-center gap-3  text-gray-600">
+                  <div className="w-8 h-8 bg-gray-300 rounded-lg flex items-center justify-center">
                     <Mail size={16} />
                   </div>
-                  <span className="text-sm truncate">{job.postedByEmail}</span>
+                  <span className="text-sm truncate text-secondary-content/60">{job.postedByEmail}</span>
                 </div>
                 <div className="flex items-center gap-3 text-gray-600">
-                  <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <div className="w-8 h-8 bg-gray-300 rounded-lg flex items-center justify-center">
                     <User size={16} />
                   </div>
-                  <span className="text-sm">Member since {randomYear}</span>
+                  <span className="text-sm text-secondary-content/60">Member since {randomYear}</span>
                 </div>
               </div>
 

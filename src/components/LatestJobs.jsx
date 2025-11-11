@@ -1,4 +1,4 @@
-import React, { use } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import JobCard from "./JobCard";
 
@@ -16,21 +16,30 @@ const cardVariants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
 };
 
-const LatestJobs = ({latestJobsPromise}) => {
-    const data = use(latestJobsPromise)
+const LatestJobs = () => {
+  const [jobs, SetJobs] = useState([]);
+
+  useEffect(() => {
+    fetch("https://taskverse-server.vercel.app/latestJobs")
+      .then((res) => res.json())
+      .then((data) => {
+        SetJobs(data);
+      });
+  }, [SetJobs]);
+  console.log(jobs);
 
   return (
     <div className="container mx-auto my-30 px-5">
       <motion.h2
-        className="text-4xl font-semibold text-black text-center "
+        className="text-4xl font-semibold text-primary-content text-center "
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        Latest Jobs 
+        Latest Jobs
       </motion.h2>
       <motion.p
-        className="mb-5 text-gray-700 text-center"
+        className="mb-5 text-secondary-content text-center"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
@@ -44,8 +53,8 @@ const LatestJobs = ({latestJobsPromise}) => {
         initial="hidden"
         animate="show"
       >
-        {data.map((job) => (
-          <motion.div key={job._id} variants={cardVariants}>
+        {jobs.map((job) => (
+          <motion.div key={job._id}>
             <JobCard job={job} />
           </motion.div>
         ))}

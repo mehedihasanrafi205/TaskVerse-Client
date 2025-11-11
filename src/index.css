@@ -1,21 +1,88 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap");
 
 @import "tailwindcss";
+
 @plugin "daisyui" {
-  themes: light --default;
+  themes: light --default, dark --prefersdark;
 }
 
 @plugin "daisyui/theme" {
   name: "light";
-  default: true;
-  --color-primary: #042A2B;
+  /* Primary Colors */
+  --color-primary: #042a2b;
+  --color-primary-content: #161618;
+  
+  /* Secondary Colors */
   --color-secondary: #f7ce3e;
+  --color-secondary-content: #141414;
+  
+  /* Accent Colors */
+  --color-accent: #e0e0e0;
+  --color-accent-content: #042a2b;
+  
+  /* Neutral Colors */
+  --color-neutral: #3d4451;
+  --color-neutral-content: #ffffff;
+  
+  /* Base Colors */
+  --color-base-100: #ffffff;
+  --color-base-200: #f8faf9;
+  --color-base-300: #f9faf9;
+  --color-base-content: #042a2b;
+  
+  /* State Colors */
+  --color-info: #2094f3;
+  --color-success: #009485;
+  --color-warning: #ff9900;
+  --color-error: #ff5724;
+  
+  /* Additional Custom Colors */
+  --color-surface: #ffffff;
+  --color-border: #e5e7eb;
+  --color-muted: #6b7280;
 }
 
-body{
-    font-family: "Outfit", sans-serif;
+@plugin "daisyui/theme" {
+  name: "dark";
+  /* Primary Colors */
+  --color-primary: #042a2b;
+  --color-primary-content: #ffffff;
+  
+  /* Secondary Colors */
+  --color-secondary: #f7ce3e;
+  --color-secondary-content: #d7e0d9;
+  
+  /* Accent Colors */
+  --color-accent: #0a372b;
+  --color-accent-content: #ffffff;
+  
+  /* Neutral Colors */
+  --color-neutral: #2a323c;
+  --color-neutral-content: #a6adbb;
+  
+  /* Base Colors */
+  --color-base-100: #0d1717;
+  --color-base-200: #042d2e;
+  --color-base-300: #0a1414;
+  --color-base-content: #e0e0e0;
+  
+  /* State Colors */
+  --color-info: #2094f3;
+  --color-success: #009485;
+  --color-warning: #ff9900;
+  --color-error: #ff5724;
+  
+  /* Additional Custom Colors */
+  --color-surface: #0f1a1a;
+  --color-border: #1e2a2a;
+  --color-muted: #9ca3af;
 }
-.logo-font{
+
+
+body {
+  font-family: "Outfit", sans-serif;
+}
+.logo-font {
   font-family: "Space Grotesk", sans-serif;
 }
 
@@ -54,6 +121,10 @@ body{
 }
 
 @keyframes slide {
-  from { width: 0; }
-  to { width: 100%; }
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
 }

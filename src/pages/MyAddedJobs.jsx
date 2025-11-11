@@ -17,7 +17,7 @@ import {
 import Loading from "../components/Loading";
 
 const MyAddedJobs = () => {
-  const { user, loading, setLoading } = use(AuthContext);
+  const { user, loading, setLoading,setRefetch,refetch } = use(AuthContext);
   const axios = useAxios();
 
   const [jobs, setJobs] = useState([]);
@@ -27,7 +27,7 @@ const MyAddedJobs = () => {
       setJobs(data.data);
       setLoading(false);
     });
-  }, [axios, user, setLoading]);
+  }, [axios, user, setLoading,refetch]);
 
   const handleDelete = async (id) => {
     const result = await Swal.fire({
@@ -50,6 +50,7 @@ const MyAddedJobs = () => {
       try {
         await axios.delete(`/deleteJob/${id}`);
         setJobs(jobs.filter((job) => job._id !== id));
+        setRefetch(!refetch)
 
         await Swal.fire({
           title: "Deleted!",
@@ -83,10 +84,10 @@ const MyAddedJobs = () => {
         <div className="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-6">
           <Briefcase className="w-12 h-12 text-gray-400" />
         </div>
-        <h3 className="text-2xl font-bold text-gray-800 mb-2">
+        <h3 className="text-2xl font-bold text-primary-content mb-2">
           No jobs posted yet
         </h3>
-        <p className="text-gray-600 mb-6">
+        <p className="text-secondary-content mb-6">
           Start by posting your first job opportunity
         </p>
         <Link to="/add-job">
@@ -110,7 +111,7 @@ const MyAddedJobs = () => {
         >
           <div className="flex flex-col items-center justify-center gap-1 mb-2">
             <motion.h2
-              className="text-3xl font-semibold text-black text-center"
+              className="text-3xl font-semibold text-primary-content text-center"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -118,7 +119,7 @@ const MyAddedJobs = () => {
               My Added Jobs
             </motion.h2>
             <motion.p
-              className="mb-5 text-gray-700 text-center"
+              className="mb-5 text-secondary-content text-center"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
@@ -127,7 +128,7 @@ const MyAddedJobs = () => {
             </motion.p>
           </div>
           <div className="flex items-center justify-center gap-3 mb-4">
-            <span className="text-lg text-gray-600">Total Jobs:</span>
+            <span className="text-lg text-secondary-content/80">Total Jobs:</span>
             <span className="text-3xl font-bold text-secondary">
               {jobs?.length}
             </span>
@@ -154,7 +155,7 @@ const MyAddedJobs = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden border  border-secondary/30 hover:border-secondary/60 group"
+              className="bg-base-200/80 rounded-2xl shadow-lg overflow-hidden border  border-secondary/30 hover:border-secondary/60 group"
             >
               <div className="grid md:grid-cols-12 gap-4 p-6">
                 {/* Job Image */}
@@ -173,12 +174,12 @@ const MyAddedJobs = () => {
                 {/* Job Details */}
                 <div className="md:col-span-6 flex flex-col justify-between">
                   <div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors duration-300">
+                    <h3 className="text-2xl font-bold text-primary-content mb-2 group-hover:text-secondary transition-colors duration-300">
                       {job.title}
                     </h3>
 
                     <div className="flex flex-wrap gap-3 mb-3">
-                      <span className="badge badge-outline border-[#F7CE3E] text-[#042A2B] bg-[#F7CE3E]/20 hover:shadow-[0_0_15px_rgba(4,42,43,0.3)] transition-all duration-300">
+                      <span className="badge badge-outline border-[#F7CE3E] text-secondary-content/90 bg-[#F7CE3E]/20 hover:shadow-[0_0_15px_rgba(4,42,43,0.3)] transition-all duration-300">
                         <Tag size={15} className="mr-1" />
                         {job.category || "General"}
                       </span>
@@ -190,7 +191,7 @@ const MyAddedJobs = () => {
                       </div>
                     </div>
 
-                    <p className="text-gray-600 line-clamp-2 mb-3">
+                    <p className="text-secondary-content/80 line-clamp-2 mb-3">
                       {job.summary || job.description}
                     </p>
 
@@ -209,16 +210,16 @@ const MyAddedJobs = () => {
                 {/* Actions */}
                 <div className="md:col-span-3 flex flex-col justify-center gap-3">
                   {/* Stats */}
-                  <div className="bg-gray-50 rounded-xl p-4 mb-2 hover:bg-linear-to-br hover:from-primary/5 hover:to-secondary/5 transition-all duration-300">
+                  <div className="bg-accent  border border-secondary/20 rounded-xl p-4 mb-2 hover:bg-linear-to-br hover:from-primary/5 hover:to-secondary/5 transition-all duration-300">
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-xs text-gray-500">
+                      <span className="text-xs text-secondary-content/90">
                         Applications
                       </span>
-                      <span className="font-bold text-primary">5</span>
+                      <span className="font-bold text-primary-content">5</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-xs text-gray-500">Views</span>
-                      <span className="font-bold text-primary">127</span>
+                      <span className="text-xs text-secondary-content/90">Views</span>
+                      <span className="font-bold text-primary-content">127</span>
                     </div>
                   </div>
 
@@ -226,7 +227,7 @@ const MyAddedJobs = () => {
                   <div className="flex flex-col gap-2">
                     <Link
                       to={`/job-detail/${job._id}`}
-                      className="btn btn-sm btn-outline border-primary text-primary hover:bg-primary hover:text-white hover:shadow-[0_0_15px_rgba(4,42,43,0.4)] w-full transition-all duration-300"
+                      className="btn btn-sm btn-outline border-primary-content text-primary-content  hover:text-white hover:shadow-[0_0_15px_rgba(4,42,43,0.4)] w-full transition-all duration-300"
                     >
                       <Eye size={16} />
                       View Details
@@ -256,7 +257,7 @@ const MyAddedJobs = () => {
           ))}
         </div>
         {/* Desktop Table View */}
-        <div className="hidden xl:block mt-12 bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+        <div className="hidden xl:block mt-12 bg-base-200/80 rounded-2xl shadow-lg overflow-hidden border border-secondary/80">
           <div className="overflow-x-auto">
             <table className="table">
               <thead className="bg-linear-to-r from-primary via-[#053234] to-[#064548] text-white">
@@ -288,7 +289,7 @@ const MyAddedJobs = () => {
                         </div>
                       </div>
                     </td>
-                    <td className="font-semibold text-gray-900 hover:text-primary transition-colors duration-300">
+                    <td className="font-semibold text-primary-content hover:text-primary transition-colors duration-300">
                       {job.title}
                     </td>
                     <td>
@@ -299,7 +300,7 @@ const MyAddedJobs = () => {
                     <td className="font-bold text-green-600 hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.4)] transition-all duration-300">
                       ${job.price.toLocaleString()}
                     </td>
-                    <td className="text-gray-600">
+                    <td className="text-secondary-content/80">
                       {job.created_at
                         ? new Date(job.created_at).toLocaleDateString()
                         : "N/A"}

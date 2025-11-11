@@ -24,7 +24,7 @@ const AllJobs = () => {
   return (
     <div className="container mx-auto my-8 px-5">
       <motion.h2
-        className="text-3xl font-semibold text-black text-center"
+        className="text-3xl font-semibold text-primary-content text-center"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -32,7 +32,7 @@ const AllJobs = () => {
         All Available Jobs 
       </motion.h2>
       <motion.p
-        className="mb-5 text-gray-700 text-center"
+        className="mb-5 text-secondary-content text-center"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
