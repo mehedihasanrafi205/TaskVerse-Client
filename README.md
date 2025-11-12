@@ -3,8 +3,6 @@
 [![Live Site](https://img.shields.io/badge/Live%20Site-Visit-blue)](https://taskverse-0.web.app/)  
 [![Client Repo](https://img.shields.io/badge/Client%20Repo-GitHub-black?logo=github)](https://github.com/MehediHasanRafi00/TaskVerse-Client)  
 [![Server Repo](https://img.shields.io/badge/Server%20Repo-GitHub-black?logo=github)](https://github.com/MehediHasanRafi00/TaskVerse-Server)  
-[![Client Commits](https://img.shields.io/badge/Client%20Commits-View-orange)](https://github.com/MehediHasanRafi00/TaskVerse-Client/commits/main/)  
-[![Server Commits](https://img.shields.io/badge/Server%20Commits-View-orange)](https://github.com/MehediHasanRafi00/TaskVerse-Server/commits/main/)
 
 ---
 
