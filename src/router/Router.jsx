@@ -13,6 +13,7 @@ import JobDetail from "../pages/JobDetail";
 import UpdateJob from "../pages/updateJob";
 import MyAddedJobs from "../pages/MyAddedJobs";
 import Error from "../pages/Error";
+import Loading from "../components/Loading";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +29,7 @@ export const router = createBrowserRouter([
         path: "all-jobs",
         Component: AllJobs,
         loader: () => fetch("https://taskverse-server.vercel.app/allJobs"),
+        hydrateFallbackElement: <Loading></Loading>,
         errorElement: <Error></Error>,
       },
       {

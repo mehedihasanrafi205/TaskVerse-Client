@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import JobCard from "./JobCard";
+import { ArrowRight, Sparkles } from "lucide-react";
+import { Link } from "react-router";
 
 const containerVariants = {
   hidden: {},
@@ -29,23 +31,28 @@ const LatestJobs = () => {
   console.log(jobs);
 
   return (
-    <div className="container mx-auto my-30 px-5">
-      <motion.h2
-        className="text-4xl font-semibold text-primary-content text-center "
+    <div className="container mx-auto mt-40 mb-20 px-5">
+      <motion.div
         initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-16"
       >
-        Latest Jobs
-      </motion.h2>
-      <motion.p
-        className="mb-5 text-secondary-content text-center"
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-      >
-        Browse and apply for available tasks on TaskVerse
-      </motion.p>
+        <div className="inline-flex items-center gap-2 bg-secondary/20 px-4 py-2 rounded-full mb-4">
+          <Sparkles className="w-4 h-4 text-secondary" />
+          <span className="text-sm font-semibold text-secondary">
+            Latest Jobs
+          </span>
+        </div>
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary-content">
+          <span className="text-secondary logo-font">Latest Jobs:</span> Turn
+          Skills Into Success
+        </h2>
+        <p className="text-secondary-content/80  max-w-2xl mx-auto">
+          Explore tasks and seize your perfect opportunity.
+        </p>
+      </motion.div>
 
       <motion.div
         className="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
@@ -59,6 +66,14 @@ const LatestJobs = () => {
           </motion.div>
         ))}
       </motion.div>
+
+      <Link
+        to={"/all-jobs"}
+        className="inline-flex items-center gap-2 px-10 mt-5 font-semibold  btn btn-outline btn-secondary rounded-lg"
+      >
+        View All Jobs
+        <ArrowRight size={18} />
+      </Link>
     </div>
   );
 };

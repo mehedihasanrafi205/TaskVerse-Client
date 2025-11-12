@@ -27,8 +27,7 @@ const features = [
 
 export const WhyChooseUs = () => {
   return (
-    <section className="py-20 mb-40 bg-base-300 relative overflow-hidden">
-      {/* Animated Background Elements */}
+    <section className="py-20 mb-40 relative overflow-hidden">
       <div className="absolute inset-0">
         <motion.div
           animate={{
@@ -49,7 +48,6 @@ export const WhyChooseUs = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -64,7 +62,7 @@ export const WhyChooseUs = () => {
             </span>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary-content">
-            Why <span className="text-secondary">TaskVerse</span> Stands Out?
+            Why <span className="text-secondary logo-font">TaskVerse</span> Stands Out?
           </h2>
           <p className="text-secondary-content/80  max-w-2xl mx-auto">
             We're dedicated to connecting talent with opportunity—securely,
@@ -72,7 +70,6 @@ export const WhyChooseUs = () => {
           </p>
         </motion.div>
 
-        {/* Features Grid */}
         <div className="grid md:grid-cols-3 gap-8 mb-8 pb-8">
           {features.map((feature, i) => {
             const Icon = feature.icon;
@@ -88,12 +85,10 @@ export const WhyChooseUs = () => {
                 className="group relative rounded-3xl"
               >
                 <div className="relative bg-[#042d2ef6] backdrop-blur-xl p-8 rounded-3xl border border-secondary/50 hover:border-secondary transition-all duration-300 overflow-hidden h-full">
-                  {/* Gradient Glow on Hover */}
                   <div
                     className={`absolute inset-0 bg-linear-to-br ${feature.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
                   />
 
-                  {/* Icon */}
                   <motion.div
                     whileHover={{ rotate: 360, scale: 1.1 }}
                     transition={{ duration: 0.6 }}
@@ -102,7 +97,6 @@ export const WhyChooseUs = () => {
                     <Icon className="w-8 h-8 text-white" strokeWidth={2} />
                   </motion.div>
 
-                  {/* Content */}
                   <div className="relative z-10">
                     <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-secondary transition-colors duration-300">
                       {feature.title}
@@ -112,16 +106,14 @@ export const WhyChooseUs = () => {
                     </p>
                   </div>
 
-                  {/* Decorative Element */}
                   <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-secondary/10 rounded-full blur-2xl group-hover:bg-secondary/20 transition-all duration-300" />
                 </div>
               </motion.div>
             );
           })}
         </div>
-        <div className="divider"></div>
+        <div className="divider before:bg-secondary/30 after:bg-secondary/30 my-8"></div>
 
-        {/* Stats Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

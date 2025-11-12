@@ -176,7 +176,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    to="/my-jobs"
+                    to="/added-jobs"
                     className="flex items-center gap-2 hover:bg-secondary/20 rounded-md px-3 py-2 transition"
                   >
                     <Briefcase size={16} /> My Jobs

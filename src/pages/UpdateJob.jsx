@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router";
 import toast from "react-hot-toast";
 import useAxios from "../hook/useAxios";
 import Swal from "sweetalert2";
+import { Sparkles } from "lucide-react";
 
 const UpdateJob = () => {
   const [job, setJob] = useState({});
@@ -79,22 +80,27 @@ const UpdateJob = () => {
         transition={{ duration: 0.4 }}
         className="bg-base-200 w-full max-w-2xl rounded-2xl shadow-lg p-8 border border-secondary/30"
       >
-        <motion.h2
-          className="text-3xl font-semibold text-primary-content text-center"
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-10"
         >
-          Update The Post
-        </motion.h2>
-        <motion.p
-          className="mb-5 text-secondary-content text-center"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          Edit and update your job posting details
-        </motion.p>
+          <div className="inline-flex items-center gap-2 bg-secondary/20 px-4 py-2 rounded-full mb-4">
+            <Sparkles className="w-4 h-4 text-secondary" />
+            <span className="text-sm font-semibold text-secondary">
+              Update Post
+            </span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary-content">
+            Update The
+            <span className="text-secondary logo-font ms-2.5 ">Post</span>
+          </h2>
+          <p className="text-secondary-content/80  max-w-2xl mx-auto">
+            Edit and update your job posting details
+          </p>
+        </motion.div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* Job Title */}

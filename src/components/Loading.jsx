@@ -4,7 +4,7 @@ import logo from "/logo.png";
 
 const Loading = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen  text-[#F7CE3E]">
+    <div className="flex flex-col items-center justify-center h-screen  text-[#F7CE3E]">
       <motion.div
         className="relative w-28 h-28 flex items-center justify-center"
         animate={{ rotate: 360 }}
@@ -29,7 +29,7 @@ const Loading = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
       >
-        Task<span className="text-primary">Verse</span>
+        Task<span className="text-primary-content">Verse</span>
       </motion.h1>
 
       <motion.p

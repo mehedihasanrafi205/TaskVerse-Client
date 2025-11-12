@@ -13,12 +13,14 @@ import {
   Calendar,
   Plus,
   Tag,
+  Sparkles,
 } from "lucide-react";
 import Loading from "../components/Loading";
 
 const MyAddedJobs = () => {
-  const { user, loading, setLoading,setRefetch,refetch } = use(AuthContext);
+  const { user, setRefetch, refetch } = use(AuthContext);
   const axios = useAxios();
+  const [loading, setLoading] = useState(true);
 
   const [jobs, setJobs] = useState([]);
 
@@ -27,7 +29,7 @@ const MyAddedJobs = () => {
       setJobs(data.data);
       setLoading(false);
     });
-  }, [axios, user, setLoading,refetch]);
+  }, [axios, user, refetch]);
 
   const handleDelete = async (id) => {
     const result = await Swal.fire({
@@ -49,8 +51,9 @@ const MyAddedJobs = () => {
     if (result.isConfirmed) {
       try {
         await axios.delete(`/deleteJob/${id}`);
+        setLoading(false);
         setJobs(jobs.filter((job) => job._id !== id));
-        setRefetch(!refetch)
+        setRefetch(!refetch);
 
         await Swal.fire({
           title: "Deleted!",
@@ -109,26 +112,33 @@ const MyAddedJobs = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <div className="flex flex-col items-center justify-center gap-1 mb-2">
-            <motion.h2
-              className="text-3xl font-semibold text-primary-content text-center"
+          <div className="flex flex-col items-center justify-center gap-1">
+            <motion.div
               initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-10"
             >
-              My Added Jobs
-            </motion.h2>
-            <motion.p
-              className="mb-5 text-secondary-content text-center"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              Manage jobs you have posted on TaskVerse
-            </motion.p>
+              <div className="inline-flex items-center gap-2 bg-secondary/20 px-4 py-2 rounded-full mb-4">
+                <Sparkles className="w-4 h-4 text-secondary" />
+                <span className="text-sm font-semibold text-secondary">
+                  Added Jobs
+                </span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary-content">
+                My Added
+                <span className="text-secondary logo-font ms-2 ">Jobs</span>
+              </h2>
+              <p className="text-secondary-content/80  max-w-2xl mx-auto">
+                Manage jobs you have posted on TaskVerse
+              </p>
+            </motion.div>
           </div>
           <div className="flex items-center justify-center gap-3 mb-4">
-            <span className="text-lg text-secondary-content/80">Total Jobs:</span>
+            <span className="text-lg text-secondary-content/80">
+              Total Jobs:
+            </span>
             <span className="text-3xl font-bold text-secondary">
               {jobs?.length}
             </span>
@@ -218,8 +228,12 @@ const MyAddedJobs = () => {
                       <span className="font-bold text-primary-content">5</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-xs text-secondary-content/90">Views</span>
-                      <span className="font-bold text-primary-content">127</span>
+                      <span className="text-xs text-secondary-content/90">
+                        Views
+                      </span>
+                      <span className="font-bold text-primary-content">
+                        127
+                      </span>
                     </div>
                   </div>
 

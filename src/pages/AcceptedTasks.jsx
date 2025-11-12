@@ -12,6 +12,7 @@ import {
   Briefcase,
   Plus,
   FileCheck,
+  Sparkles,
 } from "lucide-react";
 import Loading from "../components/Loading";
 import { Link } from "react-router";
@@ -90,24 +91,56 @@ const MyAcceptedTasks = () => {
     <div className="min-h-screen  py-10 px-4">
       <div className="container mx-auto max-w-5xl">
         {/* Header */}
-        <div className="flex flex-col items-center justify-center gap-1 mb-2">
-          <motion.h2
-            className="text-3xl font-semibold text-primary-content text-center"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            My Accepted Task
-          </motion.h2>
-          <motion.p
-            className="mb-5 text-secondary-content/80 text-center"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            Manage your ongoing projects and commitments
-          </motion.p>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-12"
+        >
+          <div className="flex flex-col items-center justify-center gap-1">
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-10"
+            >
+              <div className="inline-flex items-center gap-2 bg-secondary/20 px-4 py-2 rounded-full mb-4">
+                <Sparkles className="w-4 h-4 text-secondary" />
+                <span className="text-sm font-semibold text-secondary">
+                  Accepted Task
+                </span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary-content">
+                My Accepted 
+                <span className="text-secondary logo-font ms-2 ">Tasks</span>
+              </h2>
+              <p className="text-secondary-content/80  max-w-2xl mx-auto">
+                Manage your ongoing projects and commitments
+              </p>
+            </motion.div>
+          </div>
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <span className="text-lg text-secondary-content/80">
+              Total Tasks:
+            </span>
+            <span className="text-3xl font-bold text-secondary">
+              {tasks?.length}
+            </span>
+          </div>
+
+          {/* Add New Job Button */}
+          <Link to="/add-job">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="btn bg-secondary text-primary hover:bg-secondary/90 border-none shadow-lg hover:shadow-[0_0_20px_rgba(247,206,62,0.5)] transition-all duration-300"
+            >
+              <Plus size={20} />
+              Add New Task
+            </motion.button>
+          </Link>
+        </motion.div>
+        
         <div className="space-y-5">
           <AnimatePresence mode="popLayout">
             {tasks.map((task) => (
