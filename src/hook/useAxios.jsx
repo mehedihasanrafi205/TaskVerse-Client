@@ -10,7 +10,7 @@ const instance = axios.create({
 
 const useAxios = () => {
   const { user, signOutUser } = useAuth();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     const requestInterceptor = instance.interceptors.request.use((config) => {
@@ -21,27 +21,27 @@ const useAxios = () => {
       return config;
     });
 
-    const responseInterceptor = instance.interceptors.response.use(
-      (res) => {
-        return res;
-      },
-      (err) => {
-        const status = err.status;
-        if (status === 401 || status === 403) {
-          toast.error(" Log out the user for bad intention");
-          console.log(" Log out the user for bad intention");
-          signOutUser().then(() => {
-            // navigate("auth/login");
-          });
-        }
-      }
-    );
+    // const responseInterceptor = instance.interceptors.response.use(
+    //   (res) => {
+    //     return res;
+    //   },
+    //   (err) => {
+    //     const status = err.status;
+    //     if (status === 401 || status === 403) {
+    //       toast.error(" Log out the user for bad intention");
+    //       console.log(" Log out the user for bad intention");
+    //       signOutUser().then(() => {
+    //         // navigate("auth/login");
+    //       });
+    //     }
+    //   }
+    // );
 
     return () => {
       instance.interceptors.request.eject(requestInterceptor);
-      instance.interceptors.response.eject(responseInterceptor);
+      // instance.interceptors.response.eject(responseInterceptor);
     };
-  }, [user, signOutUser, navigate]);
+  }, [user]);
 
   return instance;
 };

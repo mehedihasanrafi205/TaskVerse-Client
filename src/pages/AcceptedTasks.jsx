@@ -111,7 +111,7 @@ const MyAcceptedTasks = () => {
                 </span>
               </div>
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary-content">
-                My Accepted 
+                My Accepted
                 <span className="text-secondary logo-font ms-2 ">Tasks</span>
               </h2>
               <p className="text-secondary-content/80  max-w-2xl mx-auto">
@@ -140,7 +140,7 @@ const MyAcceptedTasks = () => {
             </motion.button>
           </Link>
         </motion.div>
-        
+
         <div className="space-y-5">
           <AnimatePresence mode="popLayout">
             {tasks.map((task) => (
@@ -156,7 +156,7 @@ const MyAcceptedTasks = () => {
                   marginBottom: 0,
                   transition: { duration: 0.3 },
                 }}
-                className="bg-base-200/80 border  border-secondary/30 hover:border-secondary/60shadow-md rounded-2xl overflow-hidden hover:shadow-xl transition-all flex flex-col md:flex-row "
+                className="bg-base-200/80 border  border-secondary/30 hover:border-secondary/60 shadow-md rounded-2xl overflow-hidden hover:shadow-xl transition-all flex flex-col md:flex-row "
               >
                 <div className="md:w-1/3 h-[220px] overflow-hidden relative">
                   <img
@@ -167,7 +167,7 @@ const MyAcceptedTasks = () => {
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                   />
 
-                  <span className="absolute top-3 left-3 bg-[#042A2B]/90 text-[#F7CE3E] text-xs font-semibold px-3 py-1 rounded-full shadow-md">
+                  <span className="absolute top-3 left-3 bg-primary/90 text-[#F7CE3E] text-xs font-semibold px-3 py-1 rounded-full shadow-md">
                     In Progress
                   </span>
                 </div>
@@ -225,7 +225,7 @@ const MyAcceptedTasks = () => {
                       whileHover={{ scale: 1.03 }}
                       whileTap={{ scale: 0.97 }}
                       onClick={() => handleRemove(task._id, "cancel")}
-                      className="btn  bg-[#F7CE3E] text-[#042A2B] border-none hover:bg-[#FFD84C]"
+                      className="btn  bg-[#F7CE3E] text-primary border-none hover:bg-[#FFD84C]"
                     >
                       <X size={14} />
                       Cancel

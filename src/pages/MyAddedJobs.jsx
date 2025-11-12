@@ -271,7 +271,7 @@ const MyAddedJobs = () => {
           ))}
         </div>
         {/* Desktop Table View */}
-        <div className="hidden xl:block mt-12 bg-base-200/80 rounded-2xl shadow-lg overflow-hidden border border-secondary/80">
+        <div className="hidden xl:block mt-12 bg-base-200/80 rounded-2xl shadow-lg overflow-hidden border border-secondary/30 hover:border-secondary/60">
           <div className="overflow-x-auto">
             <table className="table">
               <thead className="bg-linear-to-r from-primary via-[#053234] to-[#064548] text-white">

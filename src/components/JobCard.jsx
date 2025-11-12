@@ -27,9 +27,8 @@ const JobCard = ({ job }) => {
       <motion.div
         whileHover={{ scale: 1.02, boxShadow: "0 0 5px 2px #f7ce3e" }}
         transition={{ type: "spring", stiffness: 300 }}
-        className="group bg-base-200/80  border border-secondary/20 hover:border-secondary rounded-2xl shadow-lg overflow-hidden cursor-pointer transition-all duration-300"
+        className="group bg-base-200/80  border border-secondary/30 hover:border-secondary/60 rounded-2xl shadow-lg overflow-hidden cursor-pointer transition-all duration-300"
       >
-       
         <div className="relative overflow-hidden h-56">
           <img
             src={coverImage}
@@ -37,22 +36,21 @@ const JobCard = ({ job }) => {
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           />
           <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/10 to-transparent"></div>
-          
-            <span className="absolute top-3 left-3 bg-[#042A2B]/90 text-[#F7CE3E] text-sm font-semibold px-4 py-1.5 rounded-full shadow-md">
-              {category}
-            </span>
-         
+
+          <span className="absolute top-3 left-3 bg-primary/90 text-[#F7CE3E] text-sm font-semibold px-4 py-1.5 rounded-full shadow-md">
+            {category}
+          </span>
         </div>
 
-        
         <div className="p-5 flex flex-col gap-3">
           <h2 className="text-2xl font-bold text-primary-content group-hover:text-secondary transition-colors duration-300">
             {title}
           </h2>
 
-          <p className="text-primary-content/70 text-sm line-clamp-5">{description}</p>
+          <p className="text-primary-content/70 text-sm line-clamp-5">
+            {description}
+          </p>
 
-         
           <div className="flex items-center justify-between mt-3 text-sm text-secondary/90">
             <div className="flex items-center gap-2">
               <img

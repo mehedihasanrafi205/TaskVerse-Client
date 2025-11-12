@@ -78,7 +78,7 @@ const UpdateJob = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="bg-base-200 w-full max-w-2xl rounded-2xl shadow-lg p-8 border border-secondary/30"
+        className="bg-base-200 w-full max-w-2xl rounded-2xl shadow-lg p-8 border border-secondary/30 hover:border-secondary/60"
       >
         <motion.div
           initial={{ opacity: 0, y: -20 }}

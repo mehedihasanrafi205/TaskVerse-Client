@@ -134,7 +134,7 @@ export const WhyChooseUs = () => {
             <div className="text-secondary-content/80">Jobs Posted</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl md:text-5xl font-bold text-secondary mb-2">
+            <div className="text-4xl md:text-5xl  font-bold text-secondary mb-2">
               98%
             </div>
             <div className="text-secondary-content/80">Satisfaction</div>

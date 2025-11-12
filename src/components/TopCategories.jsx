@@ -75,7 +75,7 @@ const TopCategories = () => {
                   y: -5,
                   boxShadow: "0 0 5px 2px #f7ce3e",
                 }}
-                className="group bg-base-300 backdrop-blur-md border border-secondary/50 hover:border-secondary/80 rounded-2xl shadow-sm p-6 hover:bg-[#042A2B] transition-all duration-300 cursor-pointer"
+                className="group bg-base-300 backdrop-blur-md border border-secondary/50 hover:border-secondary/80 rounded-2xl shadow-sm p-6 hover:bg-primary transition-all duration-300 cursor-pointer"
               >
                 <div className="flex flex-col items-center text-center gap-3">
                   <div className="w-14 h-14 rounded-full flex items-center justify-center bg-[#f7ce3e]/40 group-hover:bg-[#f7ce3e] transition-all duration-300">
