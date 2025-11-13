@@ -23,7 +23,7 @@ const cardVariants = {
 const AllJobs = () => {
   const data = useLoaderData();
   const [jobs, setJobs] = useState(data);
-  const [sortOption, setSortOption] = useState("");
+  const [sortOption, setSortOption] = useState("Sort By Date/Time");
   const [loading, setLoading] = useState(false);
   const axios = useAxios();
 
@@ -81,7 +81,7 @@ const AllJobs = () => {
               onChange={handleSortSystem}
               className="select  select-ghost bg-base-200 border-none outline-none focus:outline-none font-medium text-primary-content cursor-pointer"
             >
-              <option disabled className="bg-secondary text-black/80">
+              <option disabled  className="bg-secondary text-black/80">
                 Sort By Date/Time
               </option>
               <option value="newest" className="bg-secondary mt-0.5 text-black">
