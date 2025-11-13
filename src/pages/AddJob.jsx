@@ -67,7 +67,7 @@ const PostJob = () => {
   };
 
   return (
-    <div className="min-h-screen  py-15 flex justify-center items-center">
+    <div className="min-h-screen  py-25 flex justify-center items-center">
       <motion.div
         whileHover={{ boxShadow: "0 0 5px 2px #f7ce3e" }}
         initial={{ opacity: 0, y: 20 }}

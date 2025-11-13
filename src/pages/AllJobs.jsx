@@ -43,7 +43,7 @@ const AllJobs = () => {
   if(loading) return <Loading></Loading>
 
   return (
-    <div className="container mx-auto my-8 px-5">
+    <div className="container mx-auto mt-8 mb-25 px-5">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
