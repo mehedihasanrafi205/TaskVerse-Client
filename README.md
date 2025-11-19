@@ -111,9 +111,6 @@ FIREBASE_SERVICE_KEY
 **Homepage**  
 [![Homepage Screenshot](./screenshots/homepage.png)](./screenshots/homepage.png)
 
-**Profile Page**  
-[![Profile Page Screenshot](./screenshots/profile.png)](./screenshots/profile.png)
-
 **Add Job Page**  
 [![Add Job Screenshot](./screenshots/add-job.png)](./screenshots/add-job.png)
 
@@ -123,8 +120,6 @@ FIREBASE_SERVICE_KEY
 **Job Details Page**  
 [![Job Details Screenshot](./screenshots/job-details.png)](./screenshots/job-details.png)
 
-**Register Page**  
-[![Register Page Screenshot](./screenshots/register.png)](./screenshots/register.png)
 
 ---
 
